@@ -44,7 +44,7 @@ router.route('/:id').delete((req, res) => {
 router.route('/update/:id').post((req, res) => {
     Ticket.findById(req.params.id)
         .then(ticket => {
-            ticket.displayName = req.body.username;
+            ticket.displayName = req.body.displayName;
             ticket.category = req.body.category;
             ticket.priority = req.body.priority;
             ticket.subject = req.body.subject;
