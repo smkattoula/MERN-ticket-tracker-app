@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-const uri = process.env.ATLAS_URI;
+const uri = process.env.MONGODB_URI || process.env.ATLAS_URI;
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true });
 
 const connection = mongoose.connection;
@@ -26,7 +26,7 @@ app.use('/tickets', ticketsRouter);
 app.use('/users', usersRouter);
 
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static( 'client/build' ));
+    app.use(express.static( '/build' ));
 
     app.get('*', (req, res) => {
         res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
