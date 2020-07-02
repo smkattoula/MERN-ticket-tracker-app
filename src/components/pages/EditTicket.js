@@ -3,6 +3,8 @@ import DatePicker from 'react-datepicker';
 import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
 
+const base = process.env.baseURL || "http://localhost:5000"
+
 export default class EditTicket extends Component {
     constructor(props) {
         super(props);
@@ -27,7 +29,7 @@ export default class EditTicket extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:5000/tickets/'+this.props.match.params.id)
+        axios.get(base + '/tickets/'+this.props.match.params.id)
             .then(response => {
                 this.setState({
                     category: response.data.category,
@@ -93,7 +95,7 @@ export default class EditTicket extends Component {
 
         console.log(ticket);
 
-        axios.post('http://localhost:5000/tickets/update/' + this.props.match.params.id, ticket)
+        axios.post(base + '/tickets/update/' + this.props.match.params.id, ticket)
             .then(res => console.log(res.data));
 
         window.location = "/";

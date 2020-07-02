@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+const base = process.env.baseURL || "http://localhost:5000"
+
 const Ticket = props => (
     <tr>
         <td>{props.ticket.category}</td>
@@ -25,7 +27,7 @@ export default class TicketsList extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:5000/tickets/')
+        axios.get(base + '/tickets/')
             .then(response => {
                 this.setState({ tickets: response.data })
             })
@@ -35,7 +37,7 @@ export default class TicketsList extends Component {
     }
 
     deleteTicket(id) {
-        axios.delete('http://localhost:5000/tickets/'+id)
+        axios.delete(base + '/tickets/'+id)
             .then(res => console.log(res.data));
         this.setState({
             tickets: this.state.tickets.filter(el => el._id !== id)

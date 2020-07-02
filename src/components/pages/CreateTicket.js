@@ -3,6 +3,8 @@ import DatePicker from 'react-datepicker';
 import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
 
+const base = process.env.baseURL || "http://localhost:5000"
+
 export default class CreateTicket extends Component {
     constructor(props) {
         super(props);
@@ -79,7 +81,7 @@ export default class CreateTicket extends Component {
 
         console.log(ticket);
 
-        axios.post('http://localhost:5000/tickets/add', ticket)
+        axios.post(base + '/tickets/add', ticket)
             .then(res => console.log(res.data));
 
         window.location = "/";
