@@ -25,7 +25,7 @@ export default class TicketsList extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:5000/tickets/')
+        axios.get('/tickets/')
             .then(response => {
                 this.setState({ tickets: response.data })
             })
@@ -35,7 +35,7 @@ export default class TicketsList extends Component {
     }
 
     deleteTicket(id) {
-        axios.delete('http://localhost:5000/tickets/'+id)
+        axios.delete('/tickets/'+id)
             .then(res => console.log(res.data));
         this.setState({
             tickets: this.state.tickets.filter(el => el._id !== id)
